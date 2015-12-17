@@ -462,6 +462,20 @@ function mvTranslate(v) {
   multMatrix(Matrix.Translation($V([v[0], v[1], v[2]])).ensure4x4());
 }
 
+function TestVectorMatrix()
+{
+	var m = Matrix.Rotation(90, $V([0, 1, 0])).ensure4x4();
+	
+	var normalMatrix = m.inverse();
+	normalMatrix = normalMatrix.transpose();
+	var v1 = $V([0, 0, 1]);
+	var vR1 = m.multiply(v1);
+	//console.log("vR1: " + vR1[0] + ", " + vR1[1] + ", " + vR1[2]);
+	var vR2 = normalMatrix.multiply(v1);
+	//console.log("vR2: " + vR2[0] + ", " + vR2[1] + ", " + vR2[2]);
+	
+}
+
 function setMatrixUniforms() {
   var pUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
   gl.uniformMatrix4fv(pUniform, false, new Float32Array(perspectiveMatrix.flatten()));
@@ -473,6 +487,8 @@ function setMatrixUniforms() {
   normalMatrix = normalMatrix.transpose();
   var nUniform = gl.getUniformLocation(shaderProgram, "uNormalMatrix");
   gl.uniformMatrix4fv(nUniform, false, new Float32Array(normalMatrix.flatten()));
+  
+  TestVectorMatrix();
 }
 
 var mvMatrixStack = [];
