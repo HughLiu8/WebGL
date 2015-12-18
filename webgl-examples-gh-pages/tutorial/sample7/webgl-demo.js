@@ -464,13 +464,13 @@ function mvTranslate(v) {
 
 function TestVectorMatrix()
 {
-	var m = Matrix.Rotation(90, $V([0, 1, 0])).ensure4x4();
+	var angle = 90;
+	var inRadians = angle * Math.PI / 180.0;
+	var m = Matrix.Rotation(inRadians, $V([0, 1, 0])).ensure4x4();
 	
 	var normalMatrix = m.inverse();
 	normalMatrix = normalMatrix.transpose();
 	var v1 = $V([0, 0, 1]);
-	var arrM = [0, 0, 1, 1];
-	var vM = $M(arrM);
 	var vR1 = m.transformVector(v1);
 	console.log("vR1: " + vR1[0] + ", " + vR1[1] + ", " + vR1[2]);
 	var vR2 = normalMatrix.transformVector(v1);
