@@ -468,10 +468,11 @@ function TestVectorMatrix()
 	var inRadians = angle * Math.PI / 180.0;
 	var m = Matrix.Rotation(inRadians, $V([0, 1, 0])).ensure4x4();
 	
-	var normalMatrix = m.inverse();
-	normalMatrix = normalMatrix.transpose();
+	var inverseMat = m.inverse();
+	normalMatrix = inverseMat.transpose();
 	var v1 = $V([0, 0, 1]);
 	var vR1 = m.transformVector(v1);
+	var vR1Inverse = inverseMat.transformVector(vR1);
 	console.log("vR1: " + vR1[0] + ", " + vR1[1] + ", " + vR1[2]);
 	var vR2 = normalMatrix.transformVector(v1);
 	console.log("vR2: " + vR2[0] + ", " + vR2[1] + ", " + vR2[2]);
