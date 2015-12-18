@@ -469,10 +469,12 @@ function TestVectorMatrix()
 	var normalMatrix = m.inverse();
 	normalMatrix = normalMatrix.transpose();
 	var v1 = $V([0, 0, 1]);
-	var vR1 = m.multiply(v1);
-	//console.log("vR1: " + vR1[0] + ", " + vR1[1] + ", " + vR1[2]);
-	var vR2 = normalMatrix.multiply(v1);
-	//console.log("vR2: " + vR2[0] + ", " + vR2[1] + ", " + vR2[2]);
+	var arrM = [0, 0, 1, 1];
+	var vM = $M(arrM);
+	var vR1 = m.transformVector(v1);
+	console.log("vR1: " + vR1[0] + ", " + vR1[1] + ", " + vR1[2]);
+	var vR2 = normalMatrix.transformVector(v1);
+	console.log("vR2: " + vR2[0] + ", " + vR2[1] + ", " + vR2[2]);
 	
 }
 
