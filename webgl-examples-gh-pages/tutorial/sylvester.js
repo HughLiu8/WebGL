@@ -467,20 +467,25 @@ Matrix.prototype = {
   
   transformVector: function(v) {
     var elements = this.elements;
-	var result = $V([0, 0, 0]);
+	/*
 	result[0] = elements[0][0] * v.elements[0] + elements[0][1] * v.elements[1] + elements[0][2] * v.elements[2];
 	result[1] = elements[1][0] * v.elements[0] + elements[1][1] * v.elements[1] + elements[1][2] * v.elements[2];
 	result[2] = elements[2][0] * v.elements[0] + elements[2][1] * v.elements[1] + elements[2][2] * v.elements[2];
+	*/
+	var x = elements[0][0] * v.elements[0] + elements[1][0] * v.elements[1] + elements[2][0] * v.elements[2] + elements[3][0];
+    var y = elements[0][1] * v.elements[0] + elements[1][1] * v.elements[1] + elements[2][1] * v.elements[2] + elements[3][1];
+    var z = elements[0][2] * v.elements[0] + elements[1][2] * v.elements[1] + elements[2][2] * v.elements[2] + elements[3][2];
+	var result = $V([x, y, z]);
 	return result;
   },
   
   transformPoint: function(v) {
     var elements = this.elements;
     var result = $V([0, 0, 0]);
-    result[0] = elements[0][0] * v.elements[0] + elements[0][1] * v.elements[1] + elements[0][2] * v.elements[2] + elements[0][3];
-    result[1] = elements[1][0] * v.elements[0] + elements[1][1] * v.elements[1] + elements[1][2] * v.elements[2] + elements[1][3];
-    result[2] = elements[1][0] * v.elements[0] + elements[2][1] * v.elements[1] + elements[3][2] * v.elements[2] + elements[2][3];
-	var vDivide = elements[3][0] * v.elements[0] + elements[3][1] * v.elements[1] + elements[3][2] * v.elements[2] + elements[3][3];
+    result[0] = elements[0][0] * v.elements[0] + elements[1][0] * v.elements[1] + elements[2][0] * v.elements[2] + elements[3][0];
+    result[1] = elements[0][1] * v.elements[0] + elements[1][1] * v.elements[1] + elements[2][1] * v.elements[2] + elements[3][1];
+    result[2] = elements[0][2] * v.elements[0] + elements[1][2] * v.elements[1] + elements[2][2] * v.elements[2] + elements[3][2];
+	var vDivide = elements[0][3] * v.elements[0] + elements[1][3] * v.elements[1] + elements[2][3] * v.elements[2] + elements[3][3];
 	result[0] = result[0] / vDivide;
 	result[1] = result[1] / vDivide;
 	result[2] = result[2] / vDivide;
