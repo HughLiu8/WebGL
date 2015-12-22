@@ -469,14 +469,16 @@ function TestVectorMatrix()
 	var m = Matrix.Rotation(inRadians, $V([0, 1, 0])).ensure4x4();
 	var mT = Matrix.Translation($V([10, 0, 30]));
 	
-	var inverseMat = m.inverse();
+	var mTR = m.multiply(mT);
+	
+	var inverseMat = mTR.inverse();
 	normalMatrix = inverseMat.transpose();
 	var v1 = $V([0, 0, 1]);
-	var vR1 = m.transformVector(v1);
+	var vR1 = mTR.transformVector(v1);
 	var vR1Inverse = inverseMat.transformVector(vR1);
 	console.log("vR1: " + vR1.elements[0] + ", " + vR1.elements[1] + ", " + vR1.elements[2]);
 	var vR2 = normalMatrix.transformVector(v1);
-	console.log("vR2: " + Math.round(vR1Inverse.elements[0] * 1000) + ", " + vR1Inverse.elements[1] + ", " + vR1Inverse.elements[2]);
+	console.log("vR2: " + vR2.elements[0] + ", " + vR2.elements[1] + ", " + vR2.elements[2]);
 	
 }
 
